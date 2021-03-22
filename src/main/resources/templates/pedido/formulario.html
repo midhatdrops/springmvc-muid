@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="~{head :: head(Formulário)}"> </head>
+  <body>
+    <div th:replace="~{head :: logo}"></div>
+    <div id="app" class="container">
+      <div class="bg-secondary d-flex flex-row align-items-center mb-2">
+        <h1 class="display-4 ms-2">Novo Pedido</h1>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <form
+            th:object="${requisicaoPedido}"
+            method="POST"
+            action="/pedido/novo"
+          >
+            <div class="mb-3">
+              <label class="form-label" for="productName">Produto</label>
+              <input
+                th:field="*{productName}"
+                class="form-control"
+                placeholder=" Insira o nome do produto"
+                th:errorclass="is-invalid"
+              />
+              <small>Informe o nome do produto que deseja cadastrar</small>
+              <div class="invalid-feedback" th:errors="*{productName}">
+                Erros do nome do produto
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="productURL">Url do produto</label>
+              <input
+                th:field="*{productURL}"
+                class="form-control"
+                type="text"
+                placeholder="Insira a URL do produto"
+                th:errorclass="is-invalid"
+              />
+              <small
+                >Busque em algum site o endereço do produto que quer
+                cadastrar</small
+              >
+              <div class="invalid-feedback" th:errors="*{productURL}">
+                Erros do nome do produto
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="productImageURL"
+                >Url da imagem do produto</label
+              >
+              <input
+                th:field="*{productImageURL}"
+                class="form-control"
+                type="text"
+                placeholder="Insira a URL da imagem do produto"
+                th:errorclass="is-invalid"
+              />
+              <small
+                >Busque em algum site o endereço de imagem que quer
+                cadastrar</small
+              >
+              <div class="invalid-feedback" th:errors="*{productImageURL}">
+                Erros do nome do produto
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="productDescription"
+                >Descrição do produto</label
+              >
+              <input
+                th:field="*{productDescription}"
+                class="form-control"
+                type="text"
+                placeholder="Insira a URL da imagem do produto"
+                th:errorclass="is-invalid"
+              />
+              <small>Informe aqui a descrição do produto</small>
+              <div class="invalid-feedback" th:errors="*{productDescription}">
+                Erros do nome do produto
+              </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

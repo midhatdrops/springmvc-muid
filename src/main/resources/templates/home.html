@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head th:replace="~{head :: head(Homepage)}"></head>
+  <body>
+    <div th:replace="~{head :: logo}"></div>
+    <div id="app" class="container">
+      <div th:replace="~{head :: jumbotron('Meus Pedidos')}"></div>
+      <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+        <div class="navbar-nav ps-2">
+        <a th:classappend="${status} == null ? 'active': '' " href="/home" class="nav-item nav-link">Todos</a>
+        <a th:classappend="${status} == 'aguardando' ? 'active': '' " href="/home/aguardando" class="nav-link">Aguardando</a>
+        <a th:classappend="${status} == 'aprovado' ? 'active': '' " href="/home/aprovado" class="nav-item nav-link">Aprovado</a>
+        <a th:classappend="${status} == 'entregue' ? 'active': '' " href="/home/entregue" class="nav-item nav-link">Entregue</a>
+      </div>
+      <a href="/pedido/formulario" class="pe-2"><button class="btn btn-outline-secondary my-2 my-sm-0  ">Novo</button></a>
+      </nav>
+      <div th:each="pedido : ${pedidos}" class="card mb-3">
+        <th:block th:switch="${pedido.status.name()}">
+          <div th:case="'AGUARDANDO'" th:text="${pedido.nomeProduto}" class="card-header alert-warning"></div>
+          <div th:case="'APROVADO'" th:text="${pedido.nomeProduto}" class="card-header alert-success"></div>
+          <div th:case="'ENTREGUE'" th:text="${pedido.nomeProduto}" class="card-header alert-dark"></div>
+      </th:block>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-8 mb-3">
+              <div class="row">
+              <div class="col-md-5">Valor: <span th:if="${pedido.valor != null}" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valor,3, 'POINT', 2, 'COMMA')}"></span></div>
+              <div class="col-md-7" >Data de Entrega: <span  th:text="${#temporals.format(pedido.dataEntrega, 'dd/MM/yyyy')}"></span> </span>
+              </div>
+            </div>
+              <br />
+              <div>Produto</div>
+              <div>
+                <input
+                  th:value="${pedido.urlProduto}"
+                  value="Url do Produto"
+                  type="text"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+
+              <div>Descrição</div>
+              <div>
+                <textarea th:text="${pedido.descricao}" class="form-control">
+descricao do pedido</textarea
+                >
+              </div>
+            </div>
+          <div class="col-12 col-sm-4">
+            <div><img class="img-thumbnail" th:src="${pedido.urlImagem}" src="" alt="" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
