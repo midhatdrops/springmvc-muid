@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head th:replace="~{head :: head('Login Page')}"></head>
+  <body>
+    <div th:replace="~{head :: logo}"></div>
+    <div id="app" class="container">
+      <div th:replace="~{head :: jumbotron('Login')}"></div>
+      <div class="card mb-3">
+        <form th:action="@{/login}" class="card-body" method="post">
+          <div class="form-group">
+            <div class="mb-3">
+              <label class="form-label" for="username">Username</label>
+              <input
+                name="username"
+                class="form-control"
+                placeholder=" Insira o usuário"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="password">Senha</label>
+              <input
+                name="password"
+                class="form-control"
+                type="password"
+                placeholder="Insira a senha"
+              />
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Logar</button>
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
